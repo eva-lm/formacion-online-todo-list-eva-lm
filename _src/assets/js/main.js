@@ -2,6 +2,7 @@
 
 let tasks = [];
 
+//Date:
 const months = new Array(
   "Enero",
   "Febrero",
@@ -37,20 +38,22 @@ dateContent.innerHTML =
   " de " +
   f.getFullYear();
 
+//List:
 const addTaskBtn = document.querySelector(".add__task-js");
 
 const toDoList = () => {
-  console.log("holiiii");
   const input = document.querySelector(".input-js");
-  input.classList.remove("hiddden");
-  const list = document.querySelector(".task__list-js");
+  let tareita = input.value;
+  tasks.push(tareita);
 
-  let item = input.value;
-  let text = document.createTextNode(item);
-  let newItem = document.createElement("li");
-  newItem.appendChild(text);
-  list.appendChild(newItem);
-  tasks.push(newItem);
+  renderTask();
+};
+const renderTask = () => {
+  const list = document.querySelector(".task__list-js");
+  let i;
+  for (i = 0; i < tasks.length; i++) {
+    list.innerHTML += "Tarea " + i + " " + tasks[i];
+  }
   console.log(tasks);
 };
 
