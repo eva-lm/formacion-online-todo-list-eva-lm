@@ -1,6 +1,7 @@
 "use strict";
 
 let tasks = [];
+let allTasks = [];
 
 //Date:
 const months = new Array(
@@ -42,9 +43,11 @@ dateContent.innerHTML =
 const addTaskBtn = document.querySelector(".add__task-js");
 
 const toDoList = () => {
+  tasks = [];
   const input = document.querySelector(".input-js");
-  let tareita = input.value;
-  tasks.push(tareita);
+  let task = input.value;
+  tasks.push(task);
+  allTasks.push(task);
 
   renderTask();
 };
@@ -52,7 +55,7 @@ const renderTask = () => {
   const list = document.querySelector(".task__list-js");
   let i;
   for (i = 0; i < tasks.length; i++) {
-    list.innerHTML += "Tarea " + i + " " + tasks[i];
+    list.innerHTML += `<li class="task__item"><input type="checkbox" id="item" value="${i}" /> ${tasks[i]} </li>`;
   }
   console.log(tasks);
 };
