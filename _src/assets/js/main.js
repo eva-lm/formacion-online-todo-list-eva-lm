@@ -1,7 +1,6 @@
 "use strict";
 
 let tasks = [];
-let allTasks = [];
 
 //Date:
 const months = new Array(
@@ -43,21 +42,39 @@ dateContent.innerHTML =
 const addTaskBtn = document.querySelector(".add__task-js");
 
 const toDoList = () => {
-  tasks = [];
   const input = document.querySelector(".input-js");
   let task = input.value;
-  tasks.push(task);
-  allTasks.push(task);
-
+  tasks.push({
+    task: task,
+    isChecked: false
+  });
+  console.log(tasks);
   renderTask();
 };
 const renderTask = () => {
   const list = document.querySelector(".task__list-js");
-  let i;
-  for (i = 0; i < tasks.length; i++) {
-    list.innerHTML += `<li class="task__item"><input type="checkbox" id="item" value="${i}" /> ${tasks[i]} </li>`;
+  // let i;
+  // for (i = 0; i < tasks.length; i++) {
+  //   list.innerHTML += `<li class="task__item"><input class="task__input" type="checkbox" id="${i}" onclick="completedTask(this)"  /> ${tasks[i].task} </li>`;
+  // }
+
+  list.innerHTML = "";
+  let isChecked;
+
+  tasks.forEach((element, index) => {
+    isChecked = element.isChecked == true ? "checked" : "";
+    list.innerHTML += `<li class="task__item"><input class="task__input" type="checkbox" ${isChecked} id="id__${index}" value="${index}" onclick="completedTask(this)" /> <label class="task__label" name="id__${index}">${element.task}</label></li>`;
+  });
+};
+
+const completedTask = checkbox => {
+  if (checkbox.checked == true) {
+    console.log("Check el value =>", checkbox.value);
+    tasks[checkbox.value].isChecked = true;
+  } else {
+    console.log("Uncheck el value =>", checkbox.value);
+    tasks[checkbox.value].isChecked = false;
   }
-  console.log(tasks);
 };
 
 addTaskBtn.addEventListener("click", toDoList);
