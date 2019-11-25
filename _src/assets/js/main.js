@@ -63,17 +63,23 @@ const renderTask = () => {
 
   tasks.forEach((element, index) => {
     isChecked = element.isChecked == true ? "checked" : "";
-    list.innerHTML += `<li class="task__item"><input class="task__input" type="checkbox" ${isChecked} id="id__${index}" value="${index}" onclick="completedTask(this)" /> <label class="task__label" name="id__${index}">${element.task}</label></li>`;
+    list.innerHTML += `<li class="task__item">
+    <input class="task__input" type="checkbox" ${isChecked} id="id__${index}" value="${index}" onclick="completedTask(this)" />
+    <label name="id__${index}" class="task__label">${element.task}</label>
+    </li>`;
   });
 };
 
 const completedTask = checkbox => {
+  const taskLabel = document.querySelector(".task__label");
   if (checkbox.checked == true) {
     console.log("Check el value =>", checkbox.value);
     tasks[checkbox.value].isChecked = true;
+    checkbox.classList.add("line");
   } else {
     console.log("Uncheck el value =>", checkbox.value);
     tasks[checkbox.value].isChecked = false;
+    checkbox.classList.remove("line");
   }
 };
 

@@ -8,3 +8,7 @@ body {
 .hidden {
   display: none;
 }
+
+.line + label.task__label {
+  text-decoration: line-through;
+}
